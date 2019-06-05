@@ -14,7 +14,7 @@ import {
 } from '@shoutem/ui';
 import axios from 'axios';
 import SearchCard from '../components/SearchCard';
-
+import {baseURL} from '../lib/baseUrl';
 class EventAddScreen extends Component {
 
     state = {
@@ -27,7 +27,7 @@ class EventAddScreen extends Component {
 
         try {
             axios
-                .get(`http://192.168.1.9:5000/api/users/search?name=&username=${username}`)
+                .get(`${baseURL}/api/users/search?name=&username=${username}`)
                 .then(res => {
                     this.setState({ users: res.data })
                 })
@@ -45,7 +45,7 @@ class EventAddScreen extends Component {
 
         try {
             axios
-                .get(`http://192.168.1.9:5000/api/users/search?name=${query}&username=${username}`)
+                .get(`${baseURL}/api/users/search?name=${query}&username=${username}`)
                 .then(res => {
                     this.setState({ users: res.data })
                 })
