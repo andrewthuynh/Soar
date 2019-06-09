@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Soar",
-    "slug": "Soar",
+    "name": "SoarFrontend",
+    "slug": "SoarFrontend",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [

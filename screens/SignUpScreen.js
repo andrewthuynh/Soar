@@ -30,7 +30,7 @@ class SignUpScreen extends Component {
         if (this.props.auth.isAuthenticated) {
             this.props.navigation.navigate('Dashboard');
         }
-      }
+    }
 
     register = async () => {
         const { email, password, password2, name, username, image, errors } = this.state
@@ -42,18 +42,21 @@ class SignUpScreen extends Component {
             password2,
             image
         }
-        try {
-            console.log(regData);
-            await this.props.registerUser(regData);
-            await new Promise((resolve, reject) => setTimeout(resolve, 100));
-            if (Object.keys(this.props.errors).length == 0)
-                this.props.navigation.navigate('Welcome');
-            else{
-                Alert.alert('Check your input!');
-                this.props.resetErrors();
+        if (name == "" || username == "" || password == "" || password2 == "" || email == "") {
+            Alert.alert('Required fields missing');
+        } else {
+            try {
+                await this.props.registerUser(regData);
+                await new Promise((resolve, reject) => setTimeout(resolve, 300));
+                if (Object.keys(this.props.errors).length == 0)
+                    this.props.navigation.navigate('Welcome');
+                else {
+                    Alert.alert('Username/email already in use');
+                    this.props.resetErrors();
+                }
+            } catch (err) {
+                Alert.alert('Error!');
             }
-        } catch (err) {
-            Alert.alert('Error!');
         }
     }
 
@@ -69,50 +72,50 @@ class SignUpScreen extends Component {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
-                <ImageBackground source={{uri: 'https://static.collectui.com/shots/3258249/90-s-pattern-large'}} style={{width: '100%', height: '100%'}}>
-                <Title style={styles.text}> Sign Up</Title>
-                <View style={{ margin: 7 }} />
-                <TextInput
-                    placeholder='Email'
-                    onChangeText={(email) => this.setState({ email })}
-                    autoCapitalize='none'
-                />
-                <View style={{ margin: 7 }} />
-                <TextInput
-                    placeholder='Username'
-                    onChangeText={(username) => this.setState({ username })}
-                    autoCapitalize='none'
-                />
-                <View style={{ margin: 7 }} />
-                <TextInput
-                    placeholder='Name'
-                    onChangeText={(name) => this.setState({ name })}
-                />
-                <View style={{ margin: 7 }} />
-                <TextInput
-                    placeholder='Password'
-                    onChangeText={(password) => this.setState({ password })}
-                    secureTextEntry
-                />
-                <View style={{ margin: 7 }} />
-                <TextInput
-                    placeholder='Confirm Password'
-                    onChangeText={(password2) => this.setState({ password2 })}
-                    secureTextEntry
-                />
-                <View style={{ margin: 7 }} />
-                <TextInput
-                    placeholder='Profile image (optional)'
-                    onChangeText={(image) => this.setState({ image })}
-                />
-                <View style={{ margin: 7 }} />
-                <Button onPress={this.register}>
-                    <Text>Register</Text>
-                </Button>
-                <View style={{ margin: 7 }} />
-                <Button onPress={() => this.props.navigation.navigate('Welcome')}>
-                    <Text>Back</Text>
-                </Button>
+                <ImageBackground source={{ uri: 'https://static.collectui.com/shots/3258249/90-s-pattern-large' }} style={{ width: '100%', height: '100%' }}>
+                    <Title style={styles.text}> Sign Up</Title>
+                    <View style={{ margin: 7 }} />
+                    <TextInput
+                        placeholder='Email'
+                        onChangeText={(email) => this.setState({ email })}
+                        autoCapitalize='none'
+                    />
+                    <View style={{ margin: 7 }} />
+                    <TextInput
+                        placeholder='Username'
+                        onChangeText={(username) => this.setState({ username })}
+                        autoCapitalize='none'
+                    />
+                    <View style={{ margin: 7 }} />
+                    <TextInput
+                        placeholder='Name'
+                        onChangeText={(name) => this.setState({ name })}
+                    />
+                    <View style={{ margin: 7 }} />
+                    <TextInput
+                        placeholder='Password'
+                        onChangeText={(password) => this.setState({ password })}
+                        secureTextEntry
+                    />
+                    <View style={{ margin: 7 }} />
+                    <TextInput
+                        placeholder='Confirm Password'
+                        onChangeText={(password2) => this.setState({ password2 })}
+                        secureTextEntry
+                    />
+                    <View style={{ margin: 7 }} />
+                    <TextInput
+                        placeholder='Profile image (optional)'
+                        onChangeText={(image) => this.setState({ image })}
+                    />
+                    <View style={{ margin: 30 }} />
+                    <Button onPress={this.register}>
+                        <Text>Register</Text>
+                    </Button>
+                    <View style={{ margin: 7 }} />
+                    <Button onPress={() => this.props.navigation.navigate('Welcome')}>
+                        <Text>Back</Text>
+                    </Button>
                 </ImageBackground>
             </Screen>
         );
@@ -121,7 +124,7 @@ class SignUpScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        
+
         backgroundColor: '#F5F5F5'
     },
     button: {
