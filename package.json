@@ -10,7 +10,7 @@
     "@shoutem/ui": "^0.23.16",
     "axios": "^0.18.1",
     "classnames": "^2.2.6",
-    "expo": "^32.0.0",
+    "expo": "^46.0.14",
     "is-empty": "^1.2.0",
     "jwt-decode": "^2.2.0",
     "react": "16.5.0",
